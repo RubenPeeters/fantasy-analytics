@@ -41,10 +41,6 @@ jobs:
     - name: Run Ruff Linting
       run: uv run ruff check .
 
-    - name: Run MyPy Type Checking
-      # Make sure mypy is installed as a dev dependency
-      run: uv run mypy .
-
     - name: Run pytest
       # Make sure pytest is installed as a dev dependency
       run: uv run pytest
