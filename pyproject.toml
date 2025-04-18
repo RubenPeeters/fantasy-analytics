@@ -6,7 +6,6 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "mplsoccer>=1.4.0",
-    "ruff>=0.11.6",
     "scraperfc>=3.3.0",
 ]
 
