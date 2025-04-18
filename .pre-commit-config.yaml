@@ -1,10 +1,9 @@
-# .pre-commit-config.yaml
 repos:
-  # Ruff hooks (formatting and linting)
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.6 # Use the latest pre-commit tag from Ruff's repository
-    hooks:
-      - id: ruff
-        args: [--fix, --exit-non-zero-on-fix] # Automatically fix simple issues and fail if fixes were applied
-      - id: ruff-format # Run the formatter as well
-        args: []
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  # Ruff version.
+  rev: v0.11.6
+  hooks:
+    # Run the linter.
+    - id: ruff
+    # Run the formatter.
+    - id: ruff-format
