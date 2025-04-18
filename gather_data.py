@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
                 # Create the directory if it doesn't exist
                 # exist_ok=True prevents an error if the directory already exists
-                if directory_path:  # Check if directory_path is not an empty string (i.e., if file_path included a directory)
+                if directory_path:  # Check if directory_path is not an empty string
                     os.makedirs(directory_path, exist_ok=True)
                     print(f"Ensured directory '{directory_path}' exists.")
 
