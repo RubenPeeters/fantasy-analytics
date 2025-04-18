@@ -2,7 +2,7 @@
 repos:
   # Ruff hooks (formatting and linting)
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.15 # Use the latest pre-commit tag from Ruff's repository
+    rev: v0.11.6 # Use the latest pre-commit tag from Ruff's repository
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix] # Automatically fix simple issues and fail if fixes were applied
