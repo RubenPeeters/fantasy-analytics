@@ -1,0 +1,49 @@
+# .github/workflows/ci.yaml
+
+name: Python Checks
+
+on:
+  push:
+    branches:
+      # Specify the branches you want this to run on.
+      # Typically, this is your main development branch(es).
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build_and_check:
+    runs-on: ubuntu-latest # You can also use windows-latest or macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # Get the code from the repository
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' # Specify your Python version, e.g., '3.10', '3.11', '3.12'
+        cache: 'uv'           # Cache uv's installation artifacts for faster runs
+
+    - name: Install dependencies with uv
+      run: uv sync # This will install dependencies from pyproject.toml or requirements.txt
+
+    - name: Run Ruff Format Check
+      # uv run executes the command within the project's virtual environment
+      # --check flag ensures it fails if formatting is needed, instead of modifying files
+      run: uv run ruff format --check .
+
+    - name: Run Ruff Linting
+      run: uv run ruff check .
+
+    - name: Run MyPy Type Checking
+      # Make sure mypy is installed as a dev dependency
+      run: uv run mypy .
+
+    - name: Run pytest
+      # Make sure pytest is installed as a dev dependency
+      run: uv run pytest
+      # Add any specific pytest arguments if needed, e.g., uv run pytest -v
