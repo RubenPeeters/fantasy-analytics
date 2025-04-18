@@ -1,0 +1,10 @@
+[project]
+name = "fantasy-analytics"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mplsoccer>=1.4.0",
+    "scraperfc>=3.3.0",
+]
