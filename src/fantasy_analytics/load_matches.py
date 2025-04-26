@@ -3,15 +3,16 @@ import pandas as pd
 import pickle  # Import pickle
 from pathlib import Path  # Import Path
 from collections import Counter  # Import Counter for column name uniqueness
-from ScraperFC.fbref import comps
+
+# from ScraperFC.fbref import comps
 import ScraperFC as sfc
-from ScraperFC import FBref
+from ScraperFC import Sofascore
 
 # --- Configuration ---
 DB_FILE = "soccer_data.db"
 
 
-def get_valid_seasons_fb(fb: FBref, league: str):
+def get_valid_seasons_fb(fb: Sofascore, league: str):
     return fb.get_valid_seasons(league=league)
 
 
@@ -157,18 +158,15 @@ def save_dataframe_to_sqlite(
 
 if __name__ == "__main__":
     fb = sfc.FBref()
-    STAT = None
-
+    stats = ["team", "match"]
+    comps = ["Belgian Pro League"]
+    seasons = ["2023-2024", "2024-2025"]
     for league in comps:
-        seasons = get_valid_seasons_fb(fb, league)
+        # seasons = get_valid_seasons_fb(fb, league)
         for year in seasons:
-            if STAT is None:
-                file_path = Path.cwd() / "data" / league / year / f"{league}_{year}.pkl"
-            else:
-                file_path = (
-                    Path.cwd() / "data" / league / year / STAT / f"{league}_{year}.pkl"
-                )
-
+            file_path = (
+                Path.cwd() / "data" / league / year / "match" / f"{league}_{year}.pkl"
+            )
             loaded_data = None
 
             try:
@@ -183,44 +181,7 @@ if __name__ == "__main__":
             except Exception as e:
                 print(f"\nError loading objects: {e}")
 
-            if STAT is None:
-                print(loaded_data.keys())
+            print(loaded_data.info())
 
-                print(loaded_data["standard"][0].head(5))
-                print(loaded_data["standard"][0].columns)
-
-            if loaded_data is not None:
-                for stat_type, dataframes_tuple in loaded_data.items():
-                    base_table_name = stat_type.replace(" ", "_")
-                    for i, df in enumerate(dataframes_tuple):
-                        if isinstance(df, pd.DataFrame):
-                            # Determine table name based on index and stat type (e.g., squad, player, opponent)
-                            table_suffix = ""
-                            if i == 0:
-                                table_suffix = "squad"
-                            elif i == 1:
-                                table_suffix = "opponent"
-                            elif i == 2:
-                                table_suffix = "player"
-                            else:
-                                table_suffix = (
-                                    f"item_{i}"  # Fallback for unexpected DFs
-                                )
-
-                            table_name = f"{base_table_name}_{table_suffix}_stats"
-
-                            # Call the save function for each DataFrame
-                            # Use if_exists='append' if you are adding data over multiple runs/files
-                            # Use if_exists='replace' if you want to overwrite the table each time
-                            save_dataframe_to_sqlite(
-                                df=df,
-                                table_name=table_name,
-                                db_file=DB_FILE,
-                                year=year,  # Use your loaded year
-                                league=league,  # Use your loaded league
-                                if_exists="append",  # Or 'replace' as needed
-                            )
-                        else:
-                            print(
-                                f"Warning: Item {i} for '{stat_type}' is not a DataFrame. Skipping."
-                            )
+            # print(loaded_data["standard"][0].head(5))
+            # print(loaded_data["standard"][0].columns)
