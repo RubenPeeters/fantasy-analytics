@@ -8,7 +8,7 @@ class CustomFBRef(sfc.FBref):
     Custom class to scrape FBRef data.
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: tuple, **kwargs: tuple) -> None:
         super().__init__(*args, **kwargs)
 
     def scrape_match_lineups(self, link: str) -> dict:
