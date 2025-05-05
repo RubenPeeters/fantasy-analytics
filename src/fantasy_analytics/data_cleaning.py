@@ -3,7 +3,7 @@ import pandas as pd
 from collections import Counter
 
 
-def flatten_multiindex_columns(df: pd.DataFrame) -> list:
+def flatten_multiindex_columns(df: pd.DataFrame) -> pd.Index:
     """
     Flatten MultiIndex columns in a DataFrame and clean the column names.
     This function handles 'Unnamed' columns and ensures unique column names.
@@ -59,4 +59,4 @@ def flatten_multiindex_columns(df: pd.DataFrame) -> list:
         else:
             unique_columns.append(col)
 
-    return unique_columns  # Return the list of cleaned, unique column names
+    return pd.Index(unique_columns)  # Return the list of cleaned, unique column names

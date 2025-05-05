@@ -1,5 +1,6 @@
 # --- Simple Function to Save a DataFrame to SQLite ---
 import sqlite3
+from typing import Literal
 from pandas import DataFrame
 from fantasy_analytics.data_cleaning import flatten_multiindex_columns
 
@@ -10,7 +11,7 @@ def save_dataframe_to_sqlite(
     db_file: str,
     year: str,
     league: str,
-    if_exists: str = "replace",
+    if_exists: Literal["replace", "fail", "append"] = "replace",
 ) -> None:
     """
     Saves a pandas DataFrame to a specified SQLite table using df.to_sql().
