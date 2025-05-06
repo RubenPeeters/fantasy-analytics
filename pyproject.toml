@@ -8,6 +8,7 @@ dependencies = [
     "ipykernel>=6.29.5",
     "mplsoccer>=1.4.0",
     "scraperfc>=3.3.0",
+    "selenium>=4.31.0",
 ]
 
 [dependency-groups]

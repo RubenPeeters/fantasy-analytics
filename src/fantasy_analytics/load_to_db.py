@@ -2,7 +2,7 @@
 import sqlite3
 from typing import Literal
 from pandas import DataFrame
-from fantasy_analytics.data_cleaning import flatten_multiindex_columns
+from src.fantasy_analytics.data_cleaning import flatten_multiindex_columns
 
 
 def save_dataframe_to_sqlite(

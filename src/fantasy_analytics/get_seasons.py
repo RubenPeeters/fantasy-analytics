@@ -1,4 +1,4 @@
-from fantasy_analytics.custom_fbref import CustomFBRef
+from src.fantasy_analytics.custom_fbref import CustomFBRef
 
 
 def get_valid_seasons_fb(fb: CustomFBRef, league: str) -> list:
