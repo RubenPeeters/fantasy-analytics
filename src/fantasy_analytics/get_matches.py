@@ -1,4 +1,4 @@
-from src.fantasy_analytics.custom_fbref import CustomFBRef
+from .custom_fbref import CustomFBRef
 
 
 def get_fb_ref_matches(fb: CustomFBRef, year: str, league: str) -> dict:
